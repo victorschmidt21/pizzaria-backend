@@ -9,14 +9,14 @@ interface CreateProductData {
 }
 
 export class ProductService {
-  create = ({
+  create = async ({
     name,
     price,
     description,
     banner,
     category_id,
   }: CreateProductData) => {
-    const product = prismaClient.product.create({
+    const product = await prismaClient.product.create({
       data: {
         name: name,
         price: price,
@@ -28,8 +28,8 @@ export class ProductService {
     return product;
   };
 
-  getAll = () => {
-    const products = prismaClient.product.findMany({
+  getAll = async () => {
+    const products = await prismaClient.product.findMany({
       select: {
         name: true,
         price: true,
@@ -42,8 +42,8 @@ export class ProductService {
     return products;
   };
 
-  getByCategoryId = (category_id: string) => {
-    const products = prismaClient.product.findMany({
+  getByCategoryId = async (category_id: string) => {
+    const products = await prismaClient.product.findMany({
       where: {
         category_id: category_id,
       },

@@ -1,11 +1,11 @@
 import prismaClient from "../../prisma";
 
 export class CategoryService {
-  create = (name: string) => {
+  create = async (name: string) => {
     if (!name || name === '') {
       throw new Error("Nome da categoria não informado");
     }
-    const category = prismaClient.category.create({
+    const category = await prismaClient.category.create({
       data: {
         name: name,
       },
@@ -13,8 +13,8 @@ export class CategoryService {
 
     return category;
   };
-  getAll = () => {
-    const categories = prismaClient.category.findMany({
+  getAll = async () => {
+    const categories = await prismaClient.category.findMany({
       select: {
         id: true,
         name: true,

@@ -6,8 +6,8 @@ interface CreateOrderData {
 }
 
 export class OrderService {
-  createOrder = ({ table, name }: CreateOrderData) => {
-    const order = prismaClient.order.create({
+  createOrder = async ({ table, name }: CreateOrderData) => {
+    const order = await prismaClient.order.create({
       data: {
         table: table,
         name: name,
@@ -16,8 +16,8 @@ export class OrderService {
     return order;
   };
 
-  removeOrder = (order_id: string) => {
-    const orderDeleted = prismaClient.order.delete({
+  removeOrder = async (order_id: string) => {
+    const orderDeleted = await prismaClient.order.delete({
       where: {
         id: order_id,
       },
