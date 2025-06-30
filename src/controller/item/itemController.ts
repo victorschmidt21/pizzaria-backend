@@ -18,4 +18,12 @@ export class ItemController {
 
     res.json(item);
   };
+
+  removeItem = async (req: Request, res: Response): Promise<any> => {
+    const { id } = req.params;
+
+    const item = await this.itemService.removeItem(id);
+
+    return res.json(item);
+  };
 }

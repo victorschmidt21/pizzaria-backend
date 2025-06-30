@@ -8,3 +8,4 @@ const middleware = new Middleware();
 const itemController = new ItemController();
 
 itemRouter.post("", middleware.isAuth, itemController.createItem);
+itemRouter.delete("/:id", middleware.isAuth, itemController.removeItem);
