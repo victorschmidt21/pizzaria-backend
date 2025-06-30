@@ -6,8 +6,7 @@ interface CreateOrderData {
 }
 
 export class OrderService {
-
-  createOrder = ({ table, name }: CreateOrderData)  => {
+  createOrder = ({ table, name }: CreateOrderData) => {
     const order = prismaClient.order.create({
       data: {
         table: table,
@@ -15,5 +14,14 @@ export class OrderService {
       },
     });
     return order;
+  };
+
+  removeOrder = (order_id: string) => {
+    const orderDeleted = prismaClient.order.delete({
+      where: {
+        id: order_id,
+      },
+    });
+    return orderDeleted;
   };
 }

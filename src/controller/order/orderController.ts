@@ -15,4 +15,12 @@ export class OrderController {
 
     return res.json(order);
   };
+
+  removeOrder = async (req: Request, res: Response): Promise<any> => {
+    const { id } = req.params;
+
+    const order = await this.orderService.removeOrder(id);
+
+    return res.json(order);
+  };
 }
