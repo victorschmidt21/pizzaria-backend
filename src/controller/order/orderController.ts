@@ -43,6 +43,14 @@ export class OrderController {
 
     const items = await this.orderService.listItemsByOrder(id);
 
-    return res.json(items)
+    return res.json(items);
+  };
+
+  completeOrder = async (req: Request, res: Response): Promise<any> => {
+    const { id } = req.params;
+
+    const orderCompleted = await this.orderService.completeOrder(id);
+
+    return res.json(orderCompleted);
   };
 }

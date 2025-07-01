@@ -20,3 +20,9 @@ orderRoute.get(
   middleware.isAuth,
   orderController.listItemsByOrder
 );
+
+orderRoute.put(
+  "/complete/:id",
+  middleware.isAuth,
+  orderController.completeOrder
+);

@@ -51,7 +51,7 @@ export class OrderService {
     return orders;
   };
 
-  listItemsByOrder = async (order_id) => {
+  listItemsByOrder = async (order_id: string) => {
     const items = await prismaClient.item.findMany({
       where: {
         order_id: order_id,
@@ -61,5 +61,17 @@ export class OrderService {
       },
     });
     return items;
+  };
+
+  completeOrder = async (order_id: string) => {
+    const orderCompleted = await prismaClient.order.update({
+      where: {
+        id: order_id,
+      },
+      data: {
+        status: true,
+      },
+    });
+    return orderCompleted;
   };
 }
