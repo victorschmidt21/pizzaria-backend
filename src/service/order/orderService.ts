@@ -34,7 +34,32 @@ export class OrderService {
         draft: false,
       },
     });
-    
+
     return orderCompleted;
+  };
+
+  listOrdersFinished = async () => {
+    const orders = await prismaClient.order.findMany({
+      where: {
+        status: false,
+        draft: false,
+      },
+      orderBy: {
+        created_at: "desc",
+      },
+    });
+    return orders;
+  };
+
+  listItemsByOrder = async (order_id) => {
+    const items = await prismaClient.item.findMany({
+      where: {
+        order_id: order_id,
+      },
+      include: {
+        product: true,
+      },
+    });
+    return items;
   };
 }
