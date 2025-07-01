@@ -23,4 +23,12 @@ export class OrderController {
 
     return res.json(order);
   };
+
+  finishOrder = async (req: Request, res: Response): Promise<any> => {
+    const { id } = req.params;
+
+    const orderCompleted = await this.orderService.finishOrder(id);
+
+    return res.json(orderCompleted);
+  };
 }

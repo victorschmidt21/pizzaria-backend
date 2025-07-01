@@ -24,4 +24,17 @@ export class OrderService {
     });
     return orderDeleted;
   };
+
+  finishOrder = async (order_id: string) => {
+    const orderCompleted = await prismaClient.order.update({
+      where: {
+        id: order_id,
+      },
+      data: {
+        draft: false,
+      },
+    });
+    
+    return orderCompleted;
+  };
 }
